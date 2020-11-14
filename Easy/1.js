@@ -14,20 +14,21 @@ Output: [0,1]
 Output: Because nums[0] + nums[1] == 9, we return [0, 1]. */
 
 const twoNumbers = (nums, target) => {
-    arrOut = [];
-    for (let i = 0; i < nums.length-1; i++) {
-        {
-            
-            let index = nums.findIndex((z) => z!==i && nums[z] === target - nums[i])
-            nums.shift();
-            console.log(nums, i, index);
-            if (index !== -1) {
-                arrOut.push(i, index);
+    const hashMap = new Map();
+    let arrOut = [];
+    for (let i = 0; i < nums.length; i++) {
+        hashMap.set(nums[i], i);
+    }//[key, value] of hashMap
+    for (let i = 0; i < nums.length; i++) {
 
-            }
-
+        let index = hashMap.get(target - nums[i]);
+        if(index != i && index != undefined && index>i){
+            arrOut.push(i, index);
         }
+        console.log(i, index);
     }
     console.log(arrOut);
-};
-twoNumbers([2,7,11,15], 9)
+
+}
+
+twoNumbers([2, 7, 11, 15], 9)
